@@ -1,0 +1,9 @@
+body {
+  background-color: oldlace;
+}
+.mealImg {
+  max-height: 450px;
+}
+.mealName {
+  font: bold;
+}
