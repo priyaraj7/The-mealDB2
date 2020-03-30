@@ -6,6 +6,23 @@ import "./styles.css";
 import { MealDB } from "./../src/meal-db.js";
 
 $(document).ready(function() {
+  async function chainApi(query) {
+    const api = new MealDB();
+    const promises = [];
+    api.searchRecipe(query).then(searchResults => {
+      for (i = 0; i < searchResults.meals.length; i++) {
+        let detailPromise;
+        const meal = searchResults.meals[i];
+        detailPromise = api.getReceipeDetails(meal.idMeal);
+        promises.push(detailPromise);
+      }
+    });
+    const allMeals = await Promise.all(promises);
+    return allMeals.reduce((acc, meal) => {
+      return [...acc, meal.meals[0]];
+    }, []);
+  }
+
   $("#recipe").click(function() {
     const name = $("#name").val();
     $("#name").val("");
@@ -23,19 +40,7 @@ $(document).ready(function() {
           console.log(i);
           const meal = response.meals[i];
           const output = $("<div>").addClass("output");
-          // const video = $("<video>")
-          //   .addClass("video")
-          //   .appendTo(output);
-          // $("<source>")
-          //   .addClass("youtube")
-          //   .attr("src", meal.strYoutube)
-          //   .appendTo(output);
-          // const video = $("<iframe />", {
-          //   id: "video",
-          //   src: meal.strYoutube,
-          //   type: "video/mp4",
-          //   controls: true
-          // });
+
           if (meal.strYoutube) {
             const videoUrl = new URL(meal.strYoutube);
             const videoId = videoUrl.searchParams.get("v");

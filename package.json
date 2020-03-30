@@ -32,7 +32,7 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
-    "nanorouter": "^4.0.0",
+    "navigo": "^7.1.2",
     "popper.js": "^1.15.0"
   }
 }

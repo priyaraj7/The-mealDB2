@@ -36,4 +36,15 @@ export class MealDB {
   catch(e) {
     return false;
   }
+
+  // async getRandomMeals() {
+  //   const url = 'https://www.themealdb.com/api/json/v1/1/random.php';
+  //   const promises = [];
+  //   for(let i=0; i<=12; i++) {
+  //     const p = fetch(url).then(r => {
+  //       if(r.ok)
+  //     })
+  //   }
+
+  //}
 }
